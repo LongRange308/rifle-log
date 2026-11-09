@@ -54,6 +54,8 @@
   section.gallery { padding: 8px 0 64px; }
   section h2 { font-size: clamp(36px, 5vw, 56px); margin: 6px 0 24px; }
   .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+  /* The img tags carry width/height attributes so space is reserved before load; height:auto keeps the aspect ratio when CSS sets the width. */
+  .hero .shot, .strip img { height: auto; }
   .strip img { width: 100%; border-radius: 18px; border: 1px solid var(--line); scroll-snap-align: start; display: block; }
 
   section.promise { background: var(--cream); color: #171c24; padding: 56px 0; }
