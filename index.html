@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rifle-Log — Barrel Life &amp; Load Development</title>
+<meta name="description" content="Rifle-Log is a logbook for precision rifle shooters: round counts and barrel life, dope cards, load development and group measurement from a photo. On your iPhone, with no account and no ads.">
+<meta property="og:title" content="Rifle-Log — Every round. Every load. Every group.">
+<meta property="og:description" content="Round counts and barrel life, dope cards, load development and group measurement from a photo.">
+<meta property="og:image" content="https://longrange308.github.io/rifle-log/img/banner.jpg">
+<meta property="og:url" content="https://longrange308.github.io/rifle-log/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #121820; --panel: #1b222d; --line: #2a3340;
+    --cream: #f3f1ec; --muted: #a9b1bd; --brass: #d9a54e; --brass-dark: #a85a0c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink); color: var(--cream); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  a { color: var(--brass); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  .display { font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: .5px; }
+  .eyebrow { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; color: var(--brass); letter-spacing: 4px; text-transform: uppercase; font-size: 15px; }
+
+  nav { display: flex; align-items: center; gap: 12px; padding: 22px 0; }
+  nav img { width: 40px; height: 40px; border-radius: 10px; }
+  nav .eyebrow { font-size: 20px; }
+  nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+  nav .links a { color: var(--muted); text-decoration: none; }
+  nav .links a:hover { color: var(--cream); }
+
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding: 40px 0 64px; }
+  .hero h1 { font-size: clamp(52px, 9vw, 104px); margin: 0 0 20px; }
+  .hero p.lead { color: var(--muted); font-size: 19px; max-width: 520px; margin: 0 0 22px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); margin: 0 0 28px; padding: 0; list-style: none; }
+  .tags li::before { content: ""; display: inline-block; width: 22px; height: 2px; background: var(--brass); vertical-align: middle; margin-right: 10px; }
+  .cta { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .badge { display: inline-block; background: var(--brass); color: #171c24; font-weight: 700; border-radius: 999px; padding: 12px 22px; text-decoration: none; }
+  .price { color: var(--muted); font-size: 15px; }
+  .hero .shot { justify-self: center; width: min(340px, 100%); border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+
+  section.features { padding: 24px 0 64px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .feature { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+  .feature h3 { margin: 0 0 6px; font-size: 18px; }
+  .feature p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  section.gallery { padding: 8px 0 64px; }
+  section h2 { font-size: clamp(36px, 5vw, 56px); margin: 6px 0 24px; }
+  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+  .strip img { width: 100%; border-radius: 18px; border: 1px solid var(--line); scroll-snap-align: start; display: block; }
+
+  section.promise { background: var(--cream); color: #171c24; padding: 56px 0; }
+  section.promise .eyebrow { color: var(--brass-dark); }
+  section.promise ul { columns: 2; column-gap: 40px; padding-left: 20px; margin: 0; }
+  section.promise li { margin: 0 0 10px; break-inside: avoid; }
+  section.promise a { color: var(--brass-dark); }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
+  footer .row { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; padding-top: 16px; }
+    .hero .shot { width: min(300px, 80%); }
+    .grid { grid-template-columns: 1fr; }
+    section.promise ul { columns: 1; }
+    nav .links { gap: 14px; }
+  }
+  @media (max-width: 420px) { nav .links a.opt { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <img src="img/icon.png" alt="">
+    <span class="eyebrow">Rifle-Log</span>
+    <div class="links">
+      <a class="opt" href="#features">Features</a>
+      <a href="https://longrange308.github.io/rifle-log-support/">Support</a>
+      <a href="https://longrange308.github.io/freebore-privacy/">Privacy</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1 class="display">Every round.<br>Every load.<br>Every group.</h1>
+      <p class="lead">A logbook for precision rifle shooters. Track barrel life, build your dope, work up loads and measure groups from a photo, all on your iPhone.</p>
+      <ul class="tags"><li>Barrel life</li><li>Load development</li><li>Group size in MOA</li></ul>
+      <div class="cta">
+        <span class="badge">Coming soon to the App Store</span>
+        <span class="price">$1.99 once · no ads · no subscription</span>
+      </div>
+    </div>
+    <img class="shot" src="img/rifles.jpg" width="640" height="1387" alt="Rifle-Log rifles screen showing round counts and barrel life for each rifle">
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="features" id="features">
+    <div class="grid">
+      <div class="feature">
+        <h3>Round counts &amp; barrel life</h3>
+        <p>Every range session is logged against the barrel that fired it, so you always know how many rounds are on it and how much life is left.</p>
+      </div>
+      <div class="feature">
+        <h3>Dope cards</h3>
+        <p>Elevation and wind for every distance, per rifle, barrel and load. Check off what you've confirmed on target and print a card as a PDF.</p>
+      </div>
+      <div class="feature">
+        <h3>Group measurement</h3>
+        <p>Photograph a target, mark a known inch or millimetre, tap the holes. Get group size in MOA, MIL and inches.</p>
+      </div>
+      <div class="feature">
+        <h3>Load development</h3>
+        <p>Log charges, velocities and groups side by side and keep the proof of the load you settled on.</p>
+      </div>
+      <div class="feature">
+        <h3>Cleaning reminders</h3>
+        <p>A quiet "clean" badge when a rifle passes its round count since the last cleaning. You set the interval. No notifications.</p>
+      </div>
+      <div class="feature">
+        <h3>Your units, your way</h3>
+        <p>Yards or metres, MOA or MIL, set per rifle and easy to change. Mix them where it makes sense.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="eyebrow">Inside the app</div>
+    <h2 class="display">Find the load. Keep the proof.</h2>
+    <div class="strip">
+      <img src="img/sessions.jpg" width="640" height="1387" loading="lazy" alt="Range sessions">
+      <img src="img/measure.jpg" width="640" height="1387" loading="lazy" alt="Measuring a group from a target photo">
+      <img src="img/barrel.jpg" width="640" height="1387" loading="lazy" alt="Barrel tracking with sessions and rounds left">
+      <img src="img/dope.jpg" width="640" height="1387" loading="lazy" alt="A dope card with elevation and wind by distance">
+    </div>
+  </section>
+</div>
+
+<section class="promise">
+  <div class="wrap">
+    <div class="eyebrow">Your data stays yours</div>
+    <h2 class="display">One price. Nothing else.</h2>
+    <ul>
+      <li>$1.99 once. No ads, no subscription, no in-app purchases.</li>
+      <li>No account and no sign-in.</li>
+      <li>Everything is stored on your iPhone and works with no signal at the range.</li>
+      <li>Nothing leaves the phone unless you share a backup, spreadsheet or PDF yourself.</li>
+      <li>Full backups to a single file you keep.</li>
+      <li>Questions or ideas? <a href="https://longrange308.github.io/rifle-log-support/">Send a message</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <div class="row">
+      <span>Rifle-Log · by Michael Leaf</span>
+      <a href="https://longrange308.github.io/rifle-log-support/">Support</a>
+      <a href="https://longrange308.github.io/freebore-privacy/">Privacy policy</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
